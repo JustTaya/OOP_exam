@@ -1,18 +1,11 @@
 <template>
     <div>
         <nav class="page-nav">
-            <router-link class="menu-link" :to="{ name: 'lists'}"
-                         v-on:click="changeTree('lists')">Lists
-            </router-link>
-            <router-link class="menu-link" :to="{ name: 'trees'}"
-                         v-on:click="changeTree('trees')">Trees
-            </router-link>
-            <router-link class="menu-link" :to="{ name: 'hash'}"
-                         v-on:click="changeTree('hash')">Hash
-            </router-link>
-            <router-link class="menu-link" :to="{ name: 'sort'}"
-                         v-on:click="changeTree('sort')">Sorts
-            </router-link>
+            <router-link class="page-link" :to="{ name: 'main'}">Main</router-link>
+            <router-link class="page-link" :to="{ name: 'list'}">Lists</router-link>
+            <router-link class="page-link" :to="{ name: 'tree'}">Trees</router-link>
+            <router-link class="page-link" :to="{ name: 'hash'}">Hash</router-link>
+            <router-link class="page-link" :to="{ name: 'sort'}">Sorts</router-link>
         </nav>
         <section class="page-body">
             <router-view></router-view>
@@ -34,18 +27,23 @@
 <style scoped>
     .page-nav {
         width: 100%;
-        background: #ffc107;
+        background: #ff4e08;
         height: 50px;
         line-height: 50px;
         padding-top: 5px;
+        -moz-box-shadow: inset 0 -10px 10px -10px #00000088;
+        -webkit-box-shadow: inset 0 -10px 10px -10px #00000088;
+        box-shadow: inset 0 -10px 10px -10px #00000088;
     }
+
     .page-nav:first-child:before {
-        content: "Awesome Tree Visualization";
+        content: "Velychko Taisiya";
         font-weight: 700;
         font-size: 22px;
         padding: 0px 50px;
     }
-    .menu-link {
+
+    .page-link {
         display: inline-block;
         padding: 0px 16px;
         color: #212121;
@@ -55,8 +53,9 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    .menu-link.active,
-    .menu-link:hover {
+
+    .page-link.active,
+    .page-link:hover {
         background: #fefefe;
     }
 </style>

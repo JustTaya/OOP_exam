@@ -1,18 +1,46 @@
 <html>
-    <head>
-        <mata charset="utf-8" />
-        <title></title>
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/6.1.4/mocha.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.min.js'></script>
-        <script src="https://unpkg.com/http-vue-loader"></script>
-        <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
-    <body>
-        <div id="app">
-            <head-menu></head-menu>
-        </div>
+
+<head>
+    <mata charset="utf-8" />
+    <title></title>
+    <!-- Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/6.1.4/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.min.js'></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <!-- /Libs -->
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- /Styles -->
+
+    <!-- Source code-->
+    <script src="source/AbstractNode.js"></script>
+    <script src="source/List.js"></script>
+    <!-- /Source code-->
+
+    <!-- Tests-->
+    <div id="mocha"></div>
+    <script>
+        mocha.setup('bdd');
+        mocha.traceIgnores = ['mocha.min.js', 'chai.min.js'];
+        expect = chai.expect;
+    </script>
+    <script src="test/test.js"></script>
+    <script>
+        mocha.run();
+    </script>
+    <!-- /Tests-->
+</head>
+
+<body>
+    <div id="app">
+        <head-menu></head-menu>
+    </div>
+
     <script src="./vue/app.js"></script>
-    </body>
+</body>
+
 </html>

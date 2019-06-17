@@ -1,7 +1,11 @@
 class ListNode extends AbstractNode {
-    constructor(nodeKey, nodeParent) {
-        super(nodeKey, nodeParent);
-        this._next = null;
+    constructor(nodeKey, nodeNext) {
+        super(nodeKey);
+        this._next = nodeNext;
+    }
+
+    get key() {
+        return this._keys[0];
     }
 
     get next() {
@@ -21,22 +25,16 @@ class List {
         this._root = null;
     }
 
+    get root() {
+        return this._root;
+    }
+
     async insertKey_begin(newKey) {
         let tmp = new ListNode(newKey, null);
         tmp.next = this._root;
         this._root = tmp;
     }
-    /*
-            async insertKey_begin(newKey) {
-                
-                while(tmp.next!=this._root){
-                    tmp=tmp.next;
-                }
-                tmp.next = new ListNode(newKey, null);
-                tmp.next = this._root;
-                this._root = tmp;
-            }
-    */
+
     async insertKey_end(newKey) {
         let tmp = this._root;
         while (tmp.next != null) {
@@ -45,24 +43,38 @@ class List {
         tmp.next = new ListNode(newKey, null);
     }
 
-    /*
-        async insertKey_end(newKey) {
-            this.insertKey_begin(newKey);
-            this._root = this._root.next;
+    async insertKey_afterKey(newKey, key) {
+        this.searchKey(key).then(function (result) {
+            let tmp=result;
+            if (tmp != null) {
+                let newNode = new ListNode(newKey, tmp.next);
+                tmp.next = newNode;
+            }
+        });
+    }
+
+    async searchKey(newKey) {
+        console.log(this._root)
+        if (this._root == null)
+            return null;
+        let tmp = this._root;
+        while (tmp != null) {
+            if (tmp.key == newKey)
+                return tmp;
+            tmp = tmp.next;
         }
-    */
-    async insertKey_afterKey(newKey, searchKey) {
-        `       
+        return null;
     }
 
     async deleteKey(newKey) {
-
+        if (this._root === null)
+            return;
+        while (tmp.next != null) {
+            if (tmp.next.key == newKey) {
+                tmp.next = tmp.next.next;
+                break;
+            }
+            tmp = tmp.next;
+        }
     }
-
-async searchKey(newKey) {
-        let tmp=this._root;
-        while(tmp.next)
-        return tmp;
-    }
-    
 }

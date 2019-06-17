@@ -1,17 +1,27 @@
 var hashPage = httpVueLoader('./vue/pages/hash.vue')
-var listsPage = httpVueLoader('./vue/pages/lists.vue')
+var listsPage = httpVueLoader('./vue/pages/list.vue')
 var sortPage = httpVueLoader('./vue/pages/sort.vue')
-var treesPage = httpVueLoader('./vue/pages/trees.vue')
+var treesPage = httpVueLoader('./vue/pages/tree.vue')
+var mainPage = httpVueLoader('./vue/pages/main.vue')
 
 var routes = [
+    {
+        path: "/",
+        redirect: "/main"
+    },
+    {
+        path: '/main',
+        name: 'main',
+        component: mainPage
+    },
     {
         path: '/hash',
         name: 'hash',
         component: hashPage
     },
     {
-        path: '/lists',
-        name: 'lists',
+        path: '/list',
+        name: 'list',
         component: listsPage
     },
     {
@@ -20,8 +30,8 @@ var routes = [
         component: sortPage
     },
     {
-        path: '/trees',
-        name: 'trees',
+        path: '/tree',
+        name: 'tree',
         component: treesPage
     }
 ];

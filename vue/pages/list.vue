@@ -1,12 +1,12 @@
 <template>
     <div>
-        Сортировки
+        Листы
     </div>
 </template>
 
 <script>
     module.exports = {
-        name: "sort"
+        name: "list"
     };
 </script>
 

@@ -1,12 +1,12 @@
 <template>
     <div>
-        Сортировки
+        деревья
     </div>
 </template>
 
 <script>
     module.exports = {
-        name: "sort"
+        name: "tree"
     };
 </script>
 
