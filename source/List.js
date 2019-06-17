@@ -36,7 +36,7 @@ class List {
     }
 
     async insertKey_end(newKey) {
-        if (this._root == null) {
+        if (this._root === null) {
             this._root = new ListNode(newKey, null);
         }
         else {
@@ -59,11 +59,11 @@ class List {
     }
 
     async searchKey(newKey) {
-        if (this._root == null)
+        if (this._root === null)
             return null;
         let tmp = this._root;
         while (tmp != null) {
-            if (tmp.key == newKey)
+            if (tmp.key === newKey)
                 return tmp;
             tmp = tmp.next;
         }
@@ -73,13 +73,13 @@ class List {
     async deleteKey(newKey) {
         if (this._root === null)
             return;
-        if (this._root.key == newKey) {
+        if (this._root.key === newKey) {
             this._root = this._root.next;
         }
         else {
             let tmp = this._root;
             while (tmp.next != null) {
-                if (tmp.next.key == newKey) {
+                if (tmp.next.key === newKey) {
                     tmp.next = tmp.next.next;
                     break;
                 }

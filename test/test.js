@@ -1,3 +1,33 @@
+let checkBinaryTreeOrderInvariant = function (node) {
+    if (node != null) {
+        if (node.left != null) {
+            chai.assert(node.key > node.left.key);
+            checkBinaryTreeOrderInvariant(node.left);
+        }
+        if (node.right != null) {
+            chai.assert(node.key < node.right.key);
+            checkBinaryTreeOrderInvariant(node.right);
+        }
+    }
+};
+
+let checkRedBlackTreeInvariant = function (node) {
+    if (node != null) {
+        if (node.parent === null) {
+            chai.expect(node.color).to.equal(Color.black);
+        } else {
+            if (node.color == Color.red) {
+                if (node.left != null) {
+                    chai.expect(node.left.color).to.equal(Color.black);
+                }
+                if (node.right != null) {
+                    chai.expect(node.right.color).to.equal(Color.black);
+                }
+            }
+        }
+    }
+};
+
 describe('Linked List Node', () => {
     let node = new ListNode(3, null);
 
@@ -106,4 +136,89 @@ describe('Linked List', () => {
     });
 
 
+});
+
+
+describe('RedBlackTree Tree Node', () => {
+    var node = new RedBlackNode(3, null);
+
+    it('node should not be empty', () => {
+        chai.expect(node.key).to.equal(3);
+        chai.expect(node.left).to.equal(null);
+        chai.expect(node.right).to.equal(null);
+        chai.expect(node.color).to.equal(Color.red);
+    });
+
+    it('left getter & setter', () => {
+        node.left = new RedBlackNode(2, node);
+        chai.expect(node.key).to.equal(3);
+        chai.expect(node.left).to.not.equal(null);
+        chai.expect(node.left.key).to.equal(2);
+    });
+
+    it('right getter & setter', () => {
+        node.right = new RedBlackNode(5, node);
+        chai.expect(node.key).to.equal(3);
+        chai.expect(node.right).to.not.equal(null);
+        chai.expect(node.right.key).to.equal(5);
+    });
+
+    it('grandparent and uncle getters should work correct', () => {
+        node.left = new RedBlackNode(2, node);
+        node.left.left = new RedBlackNode(1, node.left);
+        node.right = new RedBlackNode(5, node);
+        node.right.right = new RedBlackNode(6, node.right);
+
+        var leftGranson = node.left.left;
+        var rightGrandson = node.right.right;
+        chai.expect(leftGranson.grandparent).to.equal(node);
+        chai.expect(leftGranson.uncle).to.equal(node.right);
+        chai.expect(rightGrandson.grandparent).to.equal(node);
+        chai.expect(rightGrandson.uncle).to.equal(node.left);
+    });
+});
+
+describe('RedBlackTree Tree', () => {
+    it('root should be empty', () => {
+        var tree = new RedBlackTree();
+
+        chai.expect(tree.root).to.equal(null);
+    });
+
+    describe('Red Black Tree insertion', () => {
+        var tree = new RedBlackTree();
+
+        it('Red Black Tree invariants', () => {
+            tree.insertKey(3);
+            checkBinaryTreeOrderInvariant(tree.root);
+            checkRedBlackTreeInvariant(tree.root);
+            tree.insertKey(5);
+            checkBinaryTreeOrderInvariant(tree.root);
+            checkRedBlackTreeInvariant(tree.root);
+            tree.insertKey(2);
+            checkBinaryTreeOrderInvariant(tree.root);
+            checkRedBlackTreeInvariant(tree.root);
+            tree.insertKey(1);
+            checkBinaryTreeOrderInvariant(tree.root);
+            checkRedBlackTreeInvariant(tree.root);
+        });
+    });
+
+    describe('Red Black Tree search', () => {
+        var tree = new RedBlackTree();
+
+        before(() => {
+            tree.insertKey(3);
+            tree.insertKey(5);
+            tree.insertKey(2);
+            tree.insertKey(1);
+        });
+        it("search should return node with searched key", () => {
+            chai.expect(tree.searchKey(3).key).to.equal(3);
+            chai.expect(tree.searchKey(5).key).to.equal(5);
+            chai.expect(tree.searchKey(2).key).to.equal(2);
+            chai.expect(tree.searchKey(1).key).to.equal(1);
+            chai.expect(tree.searchKey(7)).to.equal(null);
+        });
+    });
 });
