@@ -36,16 +36,21 @@ class List {
     }
 
     async insertKey_end(newKey) {
-        let tmp = this._root;
-        while (tmp.next != null) {
-            tmp = tmp.next;
+        if (this._root == null) {
+            this._root = new ListNode(newKey, null);
         }
-        tmp.next = new ListNode(newKey, null);
+        else {
+            let tmp = this._root;
+            while (tmp.next != null) {
+                tmp = tmp.next;
+            }
+            tmp.next = new ListNode(newKey, null);
+        }
     }
 
     async insertKey_afterKey(newKey, key) {
         this.searchKey(key).then(function (result) {
-            let tmp=result;
+            let tmp = result;
             if (tmp != null) {
                 let newNode = new ListNode(newKey, tmp.next);
                 tmp.next = newNode;
@@ -54,7 +59,6 @@ class List {
     }
 
     async searchKey(newKey) {
-        console.log(this._root)
         if (this._root == null)
             return null;
         let tmp = this._root;
@@ -69,12 +73,18 @@ class List {
     async deleteKey(newKey) {
         if (this._root === null)
             return;
-        while (tmp.next != null) {
-            if (tmp.next.key == newKey) {
-                tmp.next = tmp.next.next;
-                break;
+        if (this._root.key == newKey) {
+            this._root = this._root.next;
+        }
+        else {
+            let tmp = this._root;
+            while (tmp.next != null) {
+                if (tmp.next.key == newKey) {
+                    tmp.next = tmp.next.next;
+                    break;
+                }
+                tmp = tmp.next;
             }
-            tmp = tmp.next;
         }
     }
 }
