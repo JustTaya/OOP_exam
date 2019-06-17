@@ -12,11 +12,14 @@ let checkBinaryTreeOrderInvariant = function (node) {
 };
 
 let checkRedBlackTreeInvariant = function (node) {
+    console.log(node);
     if (node != null) {
         if (node.parent === null) {
+            console.log(node.color);
+            console.log(Color.black);
             chai.expect(node.color).to.equal(Color.black);
         } else {
-            if (node.color == Color.red) {
+            if (node.color === Color.red) {
                 if (node.left != null) {
                     chai.expect(node.left.color).to.equal(Color.black);
                 }
@@ -214,11 +217,22 @@ describe('RedBlackTree Tree', () => {
             tree.insertKey(1);
         });
         it("search should return node with searched key", () => {
-            chai.expect(tree.searchKey(3).key).to.equal(3);
-            chai.expect(tree.searchKey(5).key).to.equal(5);
-            chai.expect(tree.searchKey(2).key).to.equal(2);
-            chai.expect(tree.searchKey(1).key).to.equal(1);
-            chai.expect(tree.searchKey(7)).to.equal(null);
+
+            tree.searchKey(3).then(function (result) {
+                chai.expect(result.key).to.equal(3);
+            });
+            tree.searchKey(5).then(function (result) {
+                chai.expect(result.key).to.equal(5);
+            });
+            tree.searchKey(2).then(function (result) {
+                chai.expect(result.key).to.equal(2);
+            });
+            tree.searchKey(1).then(function (result) {
+                chai.expect(result.key).to.equal(1);
+            });
+            tree.searchKey(7).then(function (result) {
+                chai.expect(result).to.equal(null);
+            });
         });
     });
 });

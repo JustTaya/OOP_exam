@@ -36,10 +36,27 @@ class RedBlackTree extends BinaryTree {
 
     async insertKey(newKey) {
         let node = new RedBlackNode(newKey, null);
-        await this._insertNode(node);
-        await this._insertCase1(node);
+        this._insertNode(node);
+        this._insertCase1(node);
         //await treeView.updateView(makeMatrix(this));
     }
+
+    async searchKey(key) {
+        super.searchKey(key);
+        let current = this._root;
+        while (current != null) {
+            await treeView.findNode(current).blink(colors['green']);
+            if (current.key > key) {
+                current = current.left;
+            } else if (current.key < key) {
+                current = current.right;
+            } else {
+                await treeView.findNode(current).blink(colors['yellow']);
+                return current;
+            }
+        }
+        return null;
+}
 
     async _insertNode(node) {
         if (this._root == null) {
@@ -78,8 +95,9 @@ class RedBlackTree extends BinaryTree {
 
     async _insertCase1(node) {
         if (node != null) {
-            if (node.parent == null) {
+            if (node.parent === null) {
                 node.color = Color.black;
+                console.log("here");
                 //treeView.findNode(node).setStroke('black');
             } else {
                 await this._insertCase2(node);
