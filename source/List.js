@@ -29,13 +29,13 @@ class List {
         return this._root;
     }
 
-    async insertKey_begin(newKey) {
+    insertKey_begin(newKey) {
         let tmp = new ListNode(newKey, null);
         tmp.next = this._root;
         this._root = tmp;
     }
 
-    async insertKey_end(newKey) {
+    insertKey_end(newKey) {
         if (this._root === null) {
             this._root = new ListNode(newKey, null);
         }
@@ -48,17 +48,15 @@ class List {
         }
     }
 
-    async insertKey_afterKey(newKey, key) {
-        this.searchKey(key).then(function (result) {
-            let tmp = result;
-            if (tmp != null) {
-                let newNode = new ListNode(newKey, tmp.next);
-                tmp.next = newNode;
-            }
-        });
+    insertKey_afterKey(newKey, key) {
+        let tmp = this.searchKey(key);
+        if (tmp != null) {
+            let newNode = new ListNode(newKey, tmp.next);
+            tmp.next = newNode;
+        }
     }
 
-    async searchKey(newKey) {
+    searchKey(newKey) {
         if (this._root === null)
             return null;
         let tmp = this._root;
@@ -70,7 +68,7 @@ class List {
         return null;
     }
 
-    async deleteKey(newKey) {
+    deleteKey(newKey) {
         if (this._root === null)
             return;
         if (this._root.key === newKey) {
