@@ -57,43 +57,29 @@ describe('Linked List', () => {
     it('insertion ', () => {
         let list = new List();
         chai.expect(list.root).to.equal(null);
-        list.searchKey(3).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(3)).to.equal(null);
         list.insertKey_begin(3);
         chai.expect(list.root).to.not.equal(null);
         chai.expect(list.root.key).to.equal(3);
-        list.searchKey(3).then(function (result) {
-            chai.expect(result).to.equal(list.root);
-        });
+        chai.expect(list.searchKey(3)).to.equal(list.root);
 
-        list.searchKey(5).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+
+        chai.expect(list.searchKey(5)).to.equal(null);
         list.insertKey_end(5);
         chai.expect(list.root.next).to.not.equal(null);
         chai.expect(list.root.next.key).to.equal(5);
-        list.searchKey(5).then(function (result) {
-            chai.expect(result).to.equal(list.root.next);
-        });
+        chai.expect(list.searchKey(5)).to.equal(list.root.next);
 
-        list.searchKey(2).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+
+        chai.expect(list.searchKey(2)).to.equal(null);
         list.insertKey_begin(2);
         chai.expect(list.root).to.not.equal(null);
         chai.expect(list.root.key).to.equal(2);
-        list.searchKey(2).then(function (result) {
-            chai.expect(result).to.equal(list.root);
-        });
+        chai.expect(list.searchKey(2)).to.equal(list.root);
 
-        list.searchKey(1).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(1)).to.equal(null);
         list.insertKey_afterKey(1, 3);
-        list.searchKey(3).then(function (result) {
-            chai.expect(result.next.key).to.equal(1);
-        });
+        chai.expect(list.searchKey(3).next.key).to.equal(1);
     });
 
     it('deletion', () => {
@@ -103,38 +89,22 @@ describe('Linked List', () => {
         list.insertKey_begin(2);
         list.insertKey_afterKey(1, 3);
 
-        list.searchKey(1).then(function (result) {
-            chai.expect(result).to.not.equal(null);
-        });
+        chai.expect(list.searchKey(1)).to.not.equal(null);
         list.deleteKey(1);
-        list.searchKey(1).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(1)).to.equal(null);
 
-        list.searchKey(2).then(function (result) {
-            chai.expect(result).to.not.equal(null);
-        });
+        chai.expect(list.searchKey(2)).to.not.equal(null);
         list.deleteKey(2);
-        list.searchKey(2).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(2)).to.equal(null);
         chai.expect(list._root).to.not.equal(null);
 
-        list.searchKey(5).then(function (result) {
-            chai.expect(result).to.not.equal(null);
-        });
+        chai.expect(list.searchKey(5)).to.not.equal(null);
         list.deleteKey(5);
-        list.searchKey(5).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(5)).to.equal(null);
 
-        list.searchKey(3).then(function (result) {
-            chai.expect(result).to.not.equal(null);
-        });
+        chai.expect(list.searchKey(3)).to.not.equal(null);
         list.deleteKey(3);
-        list.searchKey(3).then(function (result) {
-            chai.expect(result).to.equal(null);
-        });
+        chai.expect(list.searchKey(3)).to.equal(null);
         chai.expect(list._root).to.equal(null);
     });
 
@@ -149,7 +119,7 @@ describe('Linked List Iterator', () => {
     list.insertKey_begin(2);
     list.insertKey_afterKey(1, 3);
     it('Iterator', () => {
-        let li=new ListIterator(list);
+        let li = new ListIterator(list);
         chai.expect(li.end()).to.equal(false);
         chai.expect(li.current.key).to.equal(2);
         li.next();
@@ -161,9 +131,9 @@ describe('Linked List Iterator', () => {
         li.next();
         chai.expect(li.current).to.equal(null);
         chai.expect(li.end()).to.equal(true);
-     });
+    });
     it('make array', () => {
-        let arr=getListArray(list);
+        let arr = getListArray(list);
         chai.expect(arr[0]).to.equal(2);
         chai.expect(arr[1]).to.equal(3);
         chai.expect(arr[2]).to.equal(1);
@@ -246,22 +216,11 @@ describe('RedBlackTree Tree', () => {
             tree.insertKey(1);
         });
         it("search should return node with searched key", () => {
-
-            tree.searchKey(3).then(function (result) {
-                chai.expect(result.key).to.equal(3);
-            });
-            tree.searchKey(5).then(function (result) {
-                chai.expect(result.key).to.equal(5);
-            });
-            tree.searchKey(2).then(function (result) {
-                chai.expect(result.key).to.equal(2);
-            });
-            tree.searchKey(1).then(function (result) {
-                chai.expect(result.key).to.equal(1);
-            });
-            tree.searchKey(7).then(function (result) {
-                chai.expect(result).to.equal(null);
-            });
+            chai.expect(tree.searchKey(3).key).to.equal(3);
+            chai.expect(tree.searchKey(5).key).to.equal(5);
+            chai.expect(tree.searchKey(2).key).to.equal(2);
+            chai.expect(tree.searchKey(1).key).to.equal(1);
+            chai.expect(tree.searchKey(7)).to.equal(null);
         });
     });
 });

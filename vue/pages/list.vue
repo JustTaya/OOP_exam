@@ -1,6 +1,6 @@
 <template>
     <div>
-        Однозв'язний список
+        Зв'язний список
 		<div id="container">
             <div id="graph-container"></div>
         </div>
@@ -10,7 +10,7 @@
 		<button @click="addNode_index(nodevalue)">Add after Index</button>
 		<button @click="deleteNode(nodevalue)">Delete</button>
 		<button @click="findNode(nodevalue)">Find</button>
-		<button @click="changeNode(nodevalue)">Change</button>
+		<button @click="changeNode(nodevalue)" disabled>Change</button>
     </div>
 </template>
 
@@ -22,7 +22,7 @@
 				nodesCount: 0,
 				edgesCount: 0,
 				s: null,
-				nodevalue: 1,
+				nodevalue: "1",
       			listView: null
 			}
 		},
@@ -35,17 +35,21 @@
 			},
 			addNode_index(value) {
 				let index = this.listView.searchNode(value);
-				let afterValue = prompt("After value:", 1);
-				let result=this.listView.addNode_after(value, afterValue);
-				console.log(result);
-				this.generateFromArray(result);
+				if (index != undefined && index != -1) {
+					let afterValue = prompt("After value:", 1);
+					let result=this.listView.addNode_after(value, afterValue);
+					console.log(result);
+					this.generateFromArray(result);
+				}
 			},
 			async deleteNode(value) {
 				let index = this.listView.searchNode(value);
-				this.s.graph.nodes()[index].color = '#ff0000';
-				this.s.refresh();
-				await new Promise(resolve => setTimeout(resolve, 2500));
-				this.generateFromArray(this.listView.deleteNode(value));
+				if (index != undefined && index != -1) {
+					this.s.graph.nodes()[index].color = '#ff0000';
+					this.s.refresh();
+					await new Promise(resolve => setTimeout(resolve, 2500));
+					this.generateFromArray(this.listView.deleteNode(value));
+				}
 			},
 			addNode(value) {
 				this.s.graph.addNode({
@@ -67,9 +71,15 @@
 				}
 				this.s.refresh();
 			},
-			findNode(value) {
-				this.s.graph.nodes()[value].color = '#00E676'
-				this.s.refresh();
+			async findNode(value) {
+				let index = this.listView.searchNode(value);
+				if (index != undefined && index != -1) {
+					this.s.graph.nodes()[index].color = '#00E676'
+					this.s.refresh();
+					await new Promise(resolve => setTimeout(resolve, 1000));
+					this.s.graph.nodes()[index].color = '#D500F9'
+					this.s.refresh();
+				}
 			},
 			changeNode(value) {
 				let newValue = parseInt(prompt("Enter new value", 1));
@@ -95,6 +105,7 @@
 						size: 10,
 						color: '#D500F9'
 					});
+					this.s.refresh();
 				}
 				for (let i = 1; i < array.length; i++) {
 					this.addNode(array[i]);

@@ -21,7 +21,7 @@ class ListView {
 
 
     deleteNode(value) {
-        this.deleteKey(value);
+        this._list.deleteKey(value);
         return this.update();
     }
 

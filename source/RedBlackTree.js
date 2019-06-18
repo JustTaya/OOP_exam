@@ -34,14 +34,14 @@ class RedBlackTree extends BinaryTree {
         super();
     }
 
-    async insertKey(newKey) {
+    insertKey(newKey) {
         let node = new RedBlackNode(newKey, null);
         this._insertNode(node);
         this._insertCase1(node);
         //await treeView.updateView(makeMatrix(this));
     }
 
-    async searchKey(key) {
+    searchKey(key) {
         super.searchKey(key);
         let current = this._root;
         while (current != null) {
@@ -56,9 +56,9 @@ class RedBlackTree extends BinaryTree {
             }
         }
         return null;
-}
+    }
 
-    async _insertNode(node) {
+    _insertNode(node) {
         if (this._root == null) {
             this._root = node;
             //treeView.createNewNode(node);
@@ -93,25 +93,25 @@ class RedBlackTree extends BinaryTree {
         }
     }
 
-    async _insertCase1(node) {
+    _insertCase1(node) {
         if (node != null) {
             if (node.parent === null) {
                 node.color = Color.black;
                 console.log("here");
                 //treeView.findNode(node).setStroke('black');
             } else {
-                await this._insertCase2(node);
+                this._insertCase2(node);
             }
         }
     }
 
-    async _insertCase2(node) {
+    _insertCase2(node) {
         if (node.parent.color !== Color.black) {
-            await this._insertCase3(node);
+            this._insertCase3(node);
         }
     }
 
-    async _insertCase3(node) {
+    _insertCase3(node) {
         let g = node.grandparent;
         let u = node.uncle;
 
@@ -125,24 +125,24 @@ class RedBlackTree extends BinaryTree {
             treeView.findNode(g).setStroke('red');*/
             this._insertCase1(g);
         } else {
-            await this._insertCase4(node);
+            this._insertCase4(node);
         }
     }
 
-    async _insertCase4(node) {
+    _insertCase4(node) {
         let g = node.grandparent;
 
         if (node === node.parent.right && node.parent === g.left) {
-            await this._rotateLeft(node.parent);
+              this._rotateLeft(node.parent);
             node = node.left;
         } else if (node === node.parent.left && node.parent === g.right) {
-            await this._rotateRight(node.parent);
+              this._rotateRight(node.parent);
             node = node.right;
         }
         this._insertCase5(node);
     }
 
-    async _insertCase5(node) {
+    _insertCase5(node) {
         let g = node.parent.parent;
         node.parent.color = Color.black;
         g.color = Color.red;
@@ -153,13 +153,13 @@ class RedBlackTree extends BinaryTree {
         */
 
         if (node === node.parent.left && node.parent === g.left) {
-            await this._rotateRight(g);
+              this._rotateRight(g);
         } else {
-            await this._rotateLeft(g);
+              this._rotateLeft(g);
         }
     }
 
-    async _rotateLeft(node) {
+    _rotateLeft(node) {
         let rightChild = node.right;
         node.right = rightChild.left;
         if (node.right != null) {
@@ -179,7 +179,7 @@ class RedBlackTree extends BinaryTree {
         //await treeView.rotateAround(node, makeMatrix(this));
     }
 
-    async _rotateRight(node) {
+    _rotateRight(node) {
         let leftChild = node.left;
         node.left = leftChild.right;
         if (node.left != null)
