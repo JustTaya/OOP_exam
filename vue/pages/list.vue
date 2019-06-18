@@ -1,17 +1,17 @@
 <template>
-    <div>
-        Зв'язний список
-		<div id="container">
-            <div id="graph-container"></div>
-        </div>
-		<input v-model="nodevalue" type="number">
-		<button @click="addNode_begin(nodevalue)">Add to Begin</button>
-		<button @click="addNode_end(nodevalue)">Add to End</button>
-		<button @click="addNode_index(nodevalue)">Add after Index</button>
-		<button @click="deleteNode(nodevalue)">Delete</button>
-		<button @click="findNode(nodevalue)">Find</button>
-		<button @click="changeNode(nodevalue)" disabled>Change</button>
+  <div>
+    Зв'язний список
+    <div id="container">
+      <div id="graph-container"></div>
     </div>
+    <input v-model="nodevalue" type="number">
+    <button @click="addNode_begin(nodevalue)">Add to Begin</button>
+    <button @click="addNode_end(nodevalue)">Add to End</button>
+    <button @click="addNode_index(nodevalue)">Add after Index</button>
+    <button @click="deleteNode(nodevalue)">Delete</button>
+    <button @click="findNode(nodevalue)">Find</button>
+    <button @click="changeNode(nodevalue)" disabled>Change</button>
+  </div>
 </template>
 
 <script>
@@ -33,12 +33,12 @@
 			addNode_end(value) {
 				this.generateFromArray(this.listView.addNode_end(value));
 			},
-			addNode_index(value) {
-				let index = this.listView.searchNode(value);
+			async addNode_index(value) {
+				let afterValue = prompt("After value:", 1);
+				let result=this.listView.addNode_after(value, afterValue);
+				let index = this.listView.searchNode(afterValue);
 				if (index != undefined && index != -1) {
-					let afterValue = prompt("After value:", 1);
-					let result=this.listView.addNode_after(value, afterValue);
-					console.log(result);
+					await this.findNode(afterValue);
 					this.generateFromArray(result);
 				}
 			},
@@ -126,11 +126,11 @@
 </script>
 
 <style scoped>
-	#graph-container {
-		top: 120px;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		position: absolute;
-	}
+#graph-container {
+  top: 120px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
 </style>
