@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="page-nav">
-            <router-link class="page-link" :to="{ name: 'main'}">Main</router-link>
+            <router-link class="page-link" :to="{ name: 'mainpage'}">Main</router-link>
             <router-link class="page-link" :to="{ name: 'list'}">Lists</router-link>
             <router-link class="page-link" :to="{ name: 'tree'}">Trees</router-link>
             <router-link class="page-link" :to="{ name: 'hash'}">Hash</router-link>
@@ -34,6 +34,7 @@
         -moz-box-shadow: inset 0 -10px 10px -10px #00000088;
         -webkit-box-shadow: inset 0 -10px 10px -10px #00000088;
         box-shadow: inset 0 -10px 10px -10px #00000088;
+        z-index: 99999;
     }
 
     .page-nav:first-child:before {

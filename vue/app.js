@@ -7,11 +7,11 @@ var mainPage = httpVueLoader('./vue/pages/main.vue')
 var routes = [
     {
         path: "/",
-        redirect: "/main"
+        redirect: "/mainpage"
     },
     {
-        path: '/main',
-        name: 'main',
+        path: '/mainpage',
+        name: 'mainpage',
         component: mainPage
     },
     {
@@ -43,7 +43,7 @@ var router = new VueRouter({
     linkExactActiveClass: "active"
 });
 
-new Vue({
+var vm = new Vue({
     el: "#app",
     data: {
         

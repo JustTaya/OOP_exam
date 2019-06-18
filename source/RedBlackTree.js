@@ -45,13 +45,13 @@ class RedBlackTree extends BinaryTree {
         super.searchKey(key);
         let current = this._root;
         while (current != null) {
-            await treeView.findNode(current).blink(colors['green']);
+            //await treeView.findNode(current).blink(colors['green']);
             if (current.key > key) {
                 current = current.left;
             } else if (current.key < key) {
                 current = current.right;
             } else {
-                await treeView.findNode(current).blink(colors['yellow']);
+                //await treeView.findNode(current).blink(colors['yellow']);
                 return current;
             }
         }
