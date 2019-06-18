@@ -141,6 +141,35 @@ describe('Linked List', () => {
 
 });
 
+describe('Linked List Iterator', () => {
+
+    let list = new List();
+    list.insertKey_begin(3);
+    list.insertKey_end(5);
+    list.insertKey_begin(2);
+    list.insertKey_afterKey(1, 3);
+    it('Iterator', () => {
+        let li=new ListIterator(list);
+        chai.expect(li.end()).to.equal(false);
+        chai.expect(li.current.key).to.equal(2);
+        li.next();
+        chai.expect(li.current.key).to.equal(3);
+        li.next();
+        chai.expect(li.current.key).to.equal(1);
+        li.next();
+        chai.expect(li.current.key).to.equal(5);
+        li.next();
+        chai.expect(li.current).to.equal(null);
+        chai.expect(li.end()).to.equal(true);
+     });
+    it('make array', () => {
+        let arr=getListArray(list);
+        chai.expect(arr[0]).to.equal(2);
+        chai.expect(arr[1]).to.equal(3);
+        chai.expect(arr[2]).to.equal(1);
+        chai.expect(arr[3]).to.equal(5);
+    });
+});
 
 describe('RedBlackTree Tree Node', () => {
     var node = new RedBlackNode(3, null);
