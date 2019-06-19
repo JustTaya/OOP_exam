@@ -31,7 +31,9 @@ module.exports = {
       param2: "",
       param3: "",
       param4: "",
-      key: 0
+      key: 0,
+      afterkey: 1,
+      type: 0
     };
   },
   methods: {
@@ -43,50 +45,24 @@ module.exports = {
       this.modalShow = false;
     },
     addNode_begin(key) {
-    this.key=key;
-    this.modalShow = true;
-    this.checkFlag();
-      /*this.generateFromArray(
-        this.listView.addNode_begin(key, {
-          param1: this.param1,
-          param2: this.param2,
-          param3: this.param3,
-          param4: this.param4
-        })
-      );
-      this.refresh();*/
+      this.type = 1;
+      this.key = key;
+      this.modalShow = true;
+      this.checkFlag();
     },
     addNode_end(key) {
-	  this.modalShow = true;
-      this.generateFromArray(
-        this.listView.addNode_end(key, {
-          param1: this.param1,
-          param2: this.param2,
-          param3: this.param3,
-          param4: this.param4
-        })
-      );
-      this.refresh();
-    },
-    async addNode_index(key) {
-      let afterValue = prompt("After key:", 1);
+      this.type = 2;
+      this.key = key;
       this.modalShow = true;
-      let result = this.listView.addNode_after(
-        key,
-        {
-          param1: this.param1,
-          param2: this.param2,
-          param3: this.param3,
-          param4: this.param4
-        },
-        afterValue
-      );
-      let index = this.listView.searchNode(afterValue);
-      if (index != undefined && index != -1) {
-        await this.findNode(afterValue);
-        this.generateFromArray(result);
-        this.refresh();
-      }
+      this.checkFlag();
+    },
+    addNode_index(key) {
+      let afterValue = prompt("After key:", 1);
+      this.type = 3;
+      this.key = key;
+      this.afterkey = afterValue;
+      this.modalShow = true;
+      this.checkFlag();
     },
     async deleteNode(key) {
       let index = this.listView.searchNode(key);
@@ -128,14 +104,41 @@ module.exports = {
     },
     checkFlag() {
       if (this.modalShow == true) {
-        window.setTimeout(this.checkFlag,100); /* this checks the flag every 100 milliseconds*/
+        window.setTimeout(
+          this.checkFlag,
+          100
+        ); /* this checks the flag every 100 milliseconds*/
       } else {
-        this.generateFromArray(this.listView.addNode_begin(this.key, {
+        let value = {
           param1: this.param1,
           param2: this.param2,
           param3: this.param3,
           param4: this.param4
-        }));
+        };
+        console.log(this.type);
+        switch (this.type) {
+          case 1:
+            this.generateFromArray(
+              this.listView.addNode_begin(this.key, value)
+            );
+            break;
+          case 2:
+            this.generateFromArray(this.listView.addNode_end(this.key, value));
+            break;
+          case 3:
+            console.log(typeof this.afterkey);
+            let result = this.listView.addNode_after(
+              this.key,
+              value,
+              this.afterkey
+            );
+            let index = this.listView.searchNode(this.afterkey);
+            if (index != undefined && index != -1) {
+              this.findNode(this.afterkey);
+              this.generateFromArray(result);
+            }
+            break;
+        }
         this.refresh();
       }
     },
@@ -187,14 +190,16 @@ module.exports = {
       for (let i = 1; i < array.length; i++) {
         this.addNode(array[i].key, array[i].value);
       }
-	},
-	refresh() {
-    this.param1 = "";
-    this.param1 = "";
-    this.param1 = "";
-    this.param1 = "";
-    this.key=0;
-  }
+    },
+    refresh() {
+      this.param1 = "";
+      this.param2 = "";
+      this.param3 = "";
+      this.param4 = "";
+      this.key = 0;
+      this.afterkey=0;
+      this.type=0;
+    }
   },
   mounted() {
     this.listView = new ListView();

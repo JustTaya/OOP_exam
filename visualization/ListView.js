@@ -25,8 +25,8 @@ class ListView {
         return this.update();
     }
 
-    searchNode(value) {
-        let node = this._list.searchKey(value);
+    searchNode(key) {
+        let node = this._list.searchKey(key);
         let li = new ListIterator(this._list);
         let index = 0;
         while (!li.end()) {
@@ -36,10 +36,12 @@ class ListView {
             index++;
             li.next();
         }
+        return -1;
     }
 
     update() {
         this._nodes = getListArray(this._list);
+        console.log(this._nodes);
         return this._nodes;
     }
 }
