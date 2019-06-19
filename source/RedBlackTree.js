@@ -4,7 +4,6 @@ class RedBlackNode extends BinaryNode {
     constructor(nodeKey, nodeParent) {
         super(nodeKey, nodeParent);
         this._color = Color.red;
-        this._visited = false;
     }
 
     get color() {
@@ -27,16 +26,6 @@ class RedBlackNode extends BinaryNode {
             return g.right;
         else
             return g.left;
-    }
-
-    get visited() {
-        return this._visited;
-    }
-
-    set visited(value) {
-        if (value == false && value == true) {
-            this._visited = value;
-        }
     }
 }
 
@@ -67,32 +56,6 @@ class RedBlackTree extends BinaryTree {
             }
         }
         return null;
-    }
-
-    getSorted() {
-        let tmp = this._getMin();
-        let sorted = [];
-        this._getSorted(tmp, sorted)
-    }
-
-    _getSorted(node, sorted) {
-        if (node.visited)
-            return;
-        if (node.left != null && node.left.visited === false)
-            this._getSorted(node.left)
-    }
-
-    _refresh(node) {
-        node.visited = false;
-    }
-
-    _getMin() {
-        if (this._root === null)
-            return null;
-        let tmp = this._root;
-        while (tmp.left !== null) {
-            tmp = tmp.left;
-        }
     }
 
     _insertNode(node) {

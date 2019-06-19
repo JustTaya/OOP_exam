@@ -2,9 +2,8 @@
     <div>
         <nav class="page-nav">
             <router-link class="page-link" :to="{ name: 'mainpage'}">Main</router-link>
-            <router-link class="page-link" :to="{ name: 'list'}">Lists</router-link>
-            <router-link class="page-link" :to="{ name: 'tree'}">Trees</router-link>
-            <router-link class="page-link" :to="{ name: 'hash'}">Hash</router-link>
+            <router-link class="page-link" :to="{ name: 'container'}">Key-Value Container</router-link>
+            <router-link class="page-link" :to="{ name: 'set'}">Set</router-link>
             <router-link class="page-link" :to="{ name: 'sort'}">Sorts</router-link>
         </nav>
         <section class="page-body">

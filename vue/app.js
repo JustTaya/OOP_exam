@@ -1,8 +1,15 @@
-var hashPage = httpVueLoader('./vue/pages/hash.vue')
-var listsPage = httpVueLoader('./vue/pages/list.vue')
-var sortPage = httpVueLoader('./vue/pages/sort.vue')
-var treesPage = httpVueLoader('./vue/pages/tree.vue')
-var mainPage = httpVueLoader('./vue/pages/main.vue')
+var sortPage = httpVueLoader('./vue/pages/sort.vue');
+var mainPage = httpVueLoader('./vue/pages/main.vue');
+var container = httpVueLoader('./vue/pages/keycontainer.vue');
+var setPage = httpVueLoader('./vue/pages/set.vue');
+
+var listPageContainer = httpVueLoader('./vue/pages/listcontainer.vue');
+var treePageContainer = httpVueLoader('./vue/pages/treecontainer.vue');
+var hashPageContainer = httpVueLoader('./vue/pages/hashcontainer.vue');
+
+var listPageSet = httpVueLoader('./vue/pages/listset.vue');
+var treePageSet = httpVueLoader('./vue/pages/treeset.vue');
+var hashPageSet = httpVueLoader('./vue/pages/hashset.vue');
 
 var routes = [
     {
@@ -15,14 +22,14 @@ var routes = [
         component: mainPage
     },
     {
-        path: '/hash',
-        name: 'hash',
-        component: hashPage
+        path: '/container',
+        name: 'container',
+        component: container
     },
     {
-        path: '/list',
-        name: 'list',
-        component: listsPage
+        path: '/set',
+        name: 'set',
+        component: setPage
     },
     {
         path: '/sort',
@@ -30,9 +37,34 @@ var routes = [
         component: sortPage
     },
     {
-        path: '/tree',
-        name: 'tree',
-        component: treesPage
+        path: '/set/list',
+        name: 'listSet',
+        component: listPageSet
+    },
+    {
+        path: '/set/hash',
+        name: 'hashSet',
+        component: hashPageSet
+    },
+    {
+        path: '/set/tree',
+        name: 'treeSet',
+        component: treePageSet
+    },
+    {
+        path: '/container/list',
+        name: 'listContainer',
+        component: listPageContainer
+    },
+    {
+        path: '/container/hash',
+        name: 'hashContainer',
+        component: hashPageContainer
+    },
+    {
+        path: '/container/tree',
+        name: 'treeContainer',
+        component: treePageContainer
     }
 ];
 var router = new VueRouter({
