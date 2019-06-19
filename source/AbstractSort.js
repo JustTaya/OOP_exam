@@ -1,3 +1,4 @@
+//all sorts return the array of actions to build visualisation
 class AbstractSort {
     constructor(array) {
         if (this.constructor === AbstractSort) {
@@ -11,7 +12,7 @@ class AbstractSort {
     }
 
     _swap(a, b) {
-        this.this._indexes.push({ index1: a, index2: b, type: 'swap' });
+        this._indexes.push({ index1: a, index2: b, type: 'swap' });
         let tmp = this._array[a];
         this.this._array[a] = this._array[b];
         this.this._array[b] = tmp;

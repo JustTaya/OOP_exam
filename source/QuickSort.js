@@ -24,7 +24,7 @@ class QuickSort extends AbstractSort {
         let pivot = this._array[hi];
         let i = lo;
         for (let j = lo; j < hi; j++) {
-            this.this._indexes.push({ index1: j, index2: hi, type: 'cmp' });
+            this._indexes.push({ index1: j, index2: hi, type: 'cmp' });
             if (this._array[j] < pivot) {
                 this._swap(i, j);
                 i++;
