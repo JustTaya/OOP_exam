@@ -1,12 +1,15 @@
 <template>
     <div>
-        Сортировки
+        <side-menu-sort></side-menu-sort>
     </div>
 </template>
 
 <script>
     module.exports = {
-        name: "sort"
+        name: "sortpage",
+        components: {
+            'side-menu-sort': httpVueLoader('../components/sidemenusort.vue')
+        }
     };
 </script>
 

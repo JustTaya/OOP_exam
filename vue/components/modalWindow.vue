@@ -2,16 +2,16 @@
     <div class="blurredbcg">
         <div class="modal-window">
             <h3>Insert data</h3>
-            <label for="field1">Field 1</label><br>
+            <label for="field1">Ministry</label><br>
             <input type="text" name="field1" v-model="field1"><br><br>
 
-            <label for="field2">Field 2</label><br>
+            <label for="field2">Organization</label><br>
             <input type="text" name="field2" v-model="field2"><br><br>
 
-            <label for="field3">Field 3</label><br>
+            <label for="field3">Unit</label><br>
             <input type="text" name="field3" v-model="field3"><br><br>
 
-            <label for="field4">Field 4</label><br>
+            <label for="field4">Employee</label><br>
             <input type="text" name="field4" v-model="field4"><br><br>
 
             <button @click="returnData">Pass</button>

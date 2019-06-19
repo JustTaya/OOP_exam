@@ -115,7 +115,6 @@ module.exports = {
           param3: this.param3,
           param4: this.param4
         };
-        console.log(this.type);
         switch (this.type) {
           case 1:
             this.generateFromArray(
