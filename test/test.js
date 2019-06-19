@@ -32,7 +32,7 @@ let checkRedBlackTreeInvariant = function (node) {
 };
 
 describe('Linked List Node', () => {
-    let node = new ListNode(3, null);
+    let node = new ListNode(3, null, null);
 
     it('node should not be empty', () => {
         chai.expect(node.key).to.equal(3);
@@ -40,7 +40,7 @@ describe('Linked List Node', () => {
     });
 
     it('next getter & setter', () => {
-        node.next = new ListNode(2, null);
+        node.next = new ListNode(2, null, null);
         chai.expect(node.key).to.equal(3);
         chai.expect(node.next).to.not.equal(null);
         chai.expect(node.next.key).to.equal(2);
@@ -58,36 +58,36 @@ describe('Linked List', () => {
         let list = new List();
         chai.expect(list.root).to.equal(null);
         chai.expect(list.searchKey(3)).to.equal(null);
-        list.insertKey_begin(3);
+        list.insertKey_begin(3, null);
         chai.expect(list.root).to.not.equal(null);
         chai.expect(list.root.key).to.equal(3);
         chai.expect(list.searchKey(3)).to.equal(list.root);
 
 
         chai.expect(list.searchKey(5)).to.equal(null);
-        list.insertKey_end(5);
+        list.insertKey_end(5, null);
         chai.expect(list.root.next).to.not.equal(null);
         chai.expect(list.root.next.key).to.equal(5);
         chai.expect(list.searchKey(5)).to.equal(list.root.next);
 
 
         chai.expect(list.searchKey(2)).to.equal(null);
-        list.insertKey_begin(2);
+        list.insertKey_begin(2, null);
         chai.expect(list.root).to.not.equal(null);
         chai.expect(list.root.key).to.equal(2);
         chai.expect(list.searchKey(2)).to.equal(list.root);
 
         chai.expect(list.searchKey(1)).to.equal(null);
-        list.insertKey_afterKey(1, 3);
+        list.insertKey_afterKey(1, null, 3);
         chai.expect(list.searchKey(3).next.key).to.equal(1);
     });
 
     it('deletion', () => {
         let list = new List();
-        list.insertKey_begin(3);
-        list.insertKey_end(5);
-        list.insertKey_begin(2);
-        list.insertKey_afterKey(1, 3);
+        list.insertKey_begin(3, null);
+        list.insertKey_end(5, null);
+        list.insertKey_begin(2, null);
+        list.insertKey_afterKey(1, null, 3);
 
         chai.expect(list.searchKey(1)).to.not.equal(null);
         list.deleteKey(1);
@@ -114,10 +114,10 @@ describe('Linked List', () => {
 describe('Linked List Iterator', () => {
 
     let list = new List();
-    list.insertKey_begin(3);
-    list.insertKey_end(5);
-    list.insertKey_begin(2);
-    list.insertKey_afterKey(1, 3);
+    list.insertKey_begin(3, null);
+    list.insertKey_end(5, null);
+    list.insertKey_begin(2, null);
+    list.insertKey_afterKey(1, null, 3);
     it('Iterator', () => {
         let li = new ListIterator(list);
         chai.expect(li.end()).to.equal(false);

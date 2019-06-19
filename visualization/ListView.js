@@ -4,18 +4,18 @@ class ListView {
         this._nodes = [];
     }
 
-    addNode_begin(value) {
-        this._list.insertKey_begin(value);
+    addNode_begin(key, value) {
+        this._list.insertKey_begin(key,value);
         return this.update();
     }
 
-    addNode_end(value) {
-        this._list.insertKey_end(value);
+    addNode_end(key, value) {
+        this._list.insertKey_end(key, value);
         return this.update();
     }
 
-    addNode_after(value, position) {
-        this._list.insertKey_afterKey(value, position)
+    addNode_after(key, value, position) {
+        this._list.insertKey_afterKey(key, value, position)
         return this.update();
     }
 

@@ -13,7 +13,6 @@ class InsertionSort extends AbstractSort {
                 previousPosition--;
             }
         }
-        return this._indexes;
     }
 
     _swap(a, b) {

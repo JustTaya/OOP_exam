@@ -4,13 +4,13 @@
     <div id="container">
       <div id="graph-container"></div>
     </div>
-    <input v-model="nodevalue" type="number">
-    <button @click="addNode_begin(nodevalue)">Add to Begin</button>
-    <button @click="addNode_end(nodevalue)">Add to End</button>
-    <button @click="addNode_index(nodevalue)">Add after Index</button>
-    <button @click="deleteNode(nodevalue)">Delete</button>
-    <button @click="findNode(nodevalue)">Find</button>
-    <button @click="changeNode(nodevalue)" disabled>Change</button>
+    <input v-model="nodekey" type="number">
+    <button @click="addNode_begin(nodekey)">Add to Begin</button>
+    <button @click="addNode_end(nodekey)">Add to End</button>
+    <button @click="addNode_index(nodekey)">Add after Index</button>
+    <button @click="deleteNode(nodekey)">Delete</button>
+    <button @click="findNode(nodekey)">Find</button>
+    <button @click="changeNode(nodekey)" disabled>Change</button>
   </div>
 </template>
 
@@ -22,39 +22,39 @@
 				nodesCount: 0,
 				edgesCount: 0,
 				s: null,
-				nodevalue: "1",
+				nodekey: "1",
       			listView: null
 			}
 		},
 		methods: {
-			addNode_begin(value) {
-				this.generateFromArray(this.listView.addNode_begin(value));
+			addNode_begin(key) {
+				this.generateFromArray(this.listView.addNode_begin(key,null));
 			},
-			addNode_end(value) {
-				this.generateFromArray(this.listView.addNode_end(value));
+			addNode_end(key) {
+				this.generateFromArray(this.listView.addNode_end(key,null));
 			},
-			async addNode_index(value) {
-				let afterValue = prompt("After value:", 1);
-				let result=this.listView.addNode_after(value, afterValue);
+			async addNode_index(key) {
+				let afterValue = prompt("After key:", 1);
+				let result=this.listView.addNode_after(key,null, afterValue);
 				let index = this.listView.searchNode(afterValue);
 				if (index != undefined && index != -1) {
 					await this.findNode(afterValue);
 					this.generateFromArray(result);
 				}
 			},
-			async deleteNode(value) {
-				let index = this.listView.searchNode(value);
+			async deleteNode(key) {
+				let index = this.listView.searchNode(key);
 				if (index != undefined && index != -1) {
 					this.s.graph.nodes()[index].color = '#ff0000';
 					this.s.refresh();
 					await new Promise(resolve => setTimeout(resolve, 2500));
-					this.generateFromArray(this.listView.deleteNode(value));
+					this.generateFromArray(this.listView.deleteNode(key));
 				}
 			},
-			addNode(value) {
+			addNode(key,value) {
 				this.s.graph.addNode({
 					id: 'n' + this.nodesCount++,
-					label: value,
+					label: key+'\n'+value,
 					x: this.nodesCount,
 					y: 1,
 					size: 10,
@@ -71,8 +71,8 @@
 				}
 				this.s.refresh();
 			},
-			async findNode(value) {
-				let index = this.listView.searchNode(value);
+			async findNode(key) {
+				let index = this.listView.searchNode(key);
 				if (index != undefined && index != -1) {
 					this.s.graph.nodes()[index].color = '#00E676'
 					this.s.refresh();
@@ -81,7 +81,7 @@
 					this.s.refresh();
 				}
 			},
-			changeNode(value) {
+			changeNode(key) {
 				let newValue = parseInt(prompt("Enter new value", 1));
 			},
 			generateFromArray(array) {
@@ -99,7 +99,7 @@
 					let tmp='n'+this.nodesCount++;
 					this.s.graph.addNode({
 						id: tmp,
-						label: array[0],
+						label: array[0].key+'\n'+array[0].value,
 						x: this.nodesCount,
 						y: 1,
 						size: 10,
@@ -108,7 +108,7 @@
 					this.s.refresh();
 				}
 				for (let i = 1; i < array.length; i++) {
-					this.addNode(array[i]);
+					this.addNode(array[i].key,array[i].value);
 				}
 			}
 		},

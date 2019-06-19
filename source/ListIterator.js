@@ -29,7 +29,7 @@ function getListArray(list){
     let li=new ListIterator(list);
     let arr=[];
     while(!li.end()){
-        arr.push(li.current.key);
+        arr.push({key: li.current.key,value: li.current.value});
         li.next();
     }
     return arr;

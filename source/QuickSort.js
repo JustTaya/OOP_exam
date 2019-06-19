@@ -13,7 +13,6 @@ class QuickSort extends AbstractSort {
             this._sort(lo, p - 1);
             this._sort(p + 1, hi);
         }
-        return this._indexes;
     }
 
     _swap(a, b) {
@@ -24,7 +23,6 @@ class QuickSort extends AbstractSort {
         let pivot = this._array[hi];
         let i = lo;
         for (let j = lo; j < hi; j++) {
-            this._indexes.push({ index1: j, index2: hi, type: 'cmp' });
             if (this._array[j] < pivot) {
                 this._swap(i, j);
                 i++;

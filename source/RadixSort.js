@@ -9,7 +9,6 @@ class RadixSort extends AbstractSort {
         for (let exp = 1; (m / exp) > 0; exp *= 10) {
             this._countSort(this._array.length, exp);
         }
-        return this._indexes;
     }
 
     _getMax(n) {
@@ -29,21 +28,16 @@ class RadixSort extends AbstractSort {
             value = 0;
         }
         for (let i = 0; i < n; i++) {
-            this._indexes.push({ index1: i, index2: Math.floor(_array[i] / exp), type: 'inc1' });
             count[Math.floor(_array[i] / exp)]++;
         }
         for (let i = 1; i < 10; i++) {
-            this._indexes.push({ index1: i, index2: (-1), type: 'inc2' });
             count[i] += count[i - 1];
         }
         for (let i = n - 1; i >= 0; i--) {
-            this._indexes.push({ index1: count[(arr[i] / exp) % 10] - 1, index2: i, type: 'step3' });
-            this._indexes.push({ index1: (arr[i] / exp) % 10, index2: (-1), type: 'step4' });
             output[count[(arr[i] / exp) % 10] - 1] = this._array[i];
             count[(arr[i] / exp) % 10]--;
         }
         for (let i = 0; i < n; i++) {
-            this._indexes.push({ index1: i, index2: i, type: 'step5' });
             this._array[i] = output[i];
         }
     }

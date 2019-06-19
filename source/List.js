@@ -1,11 +1,19 @@
 class ListNode extends AbstractNode {
-    constructor(nodeKey, nodeNext) {
-        super(nodeKey);
+    constructor(nodeKey, nodeValue, nodeNext) {
+        super(nodeKey, nodeValue);
         this._next = nodeNext;
     }
 
     get key() {
         return this._keys[0];
+    }
+
+    get value(){
+        return this._values[0];
+    }
+
+    set value(value){
+        this._values[0]=value;
     }
 
     get next() {
@@ -29,29 +37,29 @@ class List {
         return this._root;
     }
 
-    insertKey_begin(newKey) {
-        let tmp = new ListNode(newKey, null);
+    insertKey_begin(newKey, newValue) {
+        let tmp = new ListNode(newKey, newValue, null);
         tmp.next = this._root;
         this._root = tmp;
     }
 
-    insertKey_end(newKey) {
+    insertKey_end(newKey,newValue) {
         if (this._root === null) {
-            this._root = new ListNode(newKey, null);
+            this._root = new ListNode(newKey, newValue, null);
         }
         else {
             let tmp = this._root;
             while (tmp.next != null) {
                 tmp = tmp.next;
             }
-            tmp.next = new ListNode(newKey, null);
+            tmp.next = new ListNode(newKey, newValue, null);
         }
     }
 
-    insertKey_afterKey(newKey, key) {
+    insertKey_afterKey(newKey, newValue, key) {
         let tmp = this.searchKey(key);
         if (tmp != null) {
-            let newNode = new ListNode(newKey, tmp.next);
+            let newNode = new ListNode(newKey, newValue, tmp.next);
             tmp.next = newNode;
         }
     }
