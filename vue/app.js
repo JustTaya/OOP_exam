@@ -11,6 +11,9 @@ var listPageSet = httpVueLoader('./vue/pages/listset.vue');
 var treePageSet = httpVueLoader('./vue/pages/treeset.vue');
 var hashPageSet = httpVueLoader('./vue/pages/hashset.vue');
 
+var listPageSort = httpVueLoader('./vue/pages/listsort.vue');
+var treePageSort = httpVueLoader('./vue/pages/treesort.vue');
+
 var routes = [
     {
         path: "/",
@@ -65,8 +68,19 @@ var routes = [
         path: '/container/tree',
         name: 'treeContainer',
         component: treePageContainer
+    },
+    {
+        path: '/sort/list',
+        name: 'listSort',
+        component: listPageSort
+    },
+    {
+        path: '/sort/tree',
+        name: 'treeSort',
+        component: treePageSort
     }
 ];
+
 var router = new VueRouter({
     hashbang: false,
     history: true,
